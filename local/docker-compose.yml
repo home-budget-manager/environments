@@ -1,0 +1,16 @@
+name: hbm-local
+
+services:
+  frontend.webui:
+    image: home-budget-manager/frontend.webui:local
+    restart: always
+    ports:
+      - "6001:3000"
+    volumes:
+      - ./frontend.webui/configuration.json:/app/public/configuration.json
+
+  bff.webui:
+    image: home-budget-manager/bff.webui:local
+    restart: always
+    ports:
+      - "6002:8080"
