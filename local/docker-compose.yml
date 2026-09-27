@@ -1,7 +1,6 @@
 name: hbm-local
 
 services:
-
   frontend.webui:
     container_name: frontend.webui
     image: home-budget-manager/frontend.webui:local
@@ -15,10 +14,19 @@ services:
     restart: always
     environment:
       - DomainServices__Services__0__url=http://services.accounts:8080
+      - DomainServices__Services__1__url=http://services.operations:8080
+    depends_on:
+      - services.accounts
+      - services.operations
 
   services.accounts:
     container_name: services.accounts
     image: home-budget-manager/services.accounts:local
+    restart: always
+
+  services.operations:
+    container_name: services.operations
+    image: home-budget-manager/services.operations:local
     restart: always
 
   reverse-proxy:
